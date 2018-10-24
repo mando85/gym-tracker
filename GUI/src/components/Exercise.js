@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./Exercise.css";
 
 function Exercise(props) {
   return (
     <div className="exercise">
-      <span>{props.name}: {props.description}</span>
+      <span><b>{props.name}</b> <br /> {props.description}</span>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-.exercise {
+.user {
     margin: 20px;
     padding: 20px;
     border: 1px solid #bbb;
@@ -6,7 +6,7 @@
     display: inline-block;
   }
   
-  .exercise span {
+  .user span {
     font-size: 1.2em;
     text-decoration: none;
     color: #333;
