@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import Navigation from '../components/Navigation';
-import ExerciseList from '../components/ExerciseList';
-import axios from "axios";
+import ExerciseList from '../components/exercises/ExerciseList';
+import axios from 'axios';
 
 class Exercises extends Component {
   state = {
@@ -21,8 +22,9 @@ class Exercises extends Component {
         const exercises = response.data.map(e => {
           return {
             id: e._id,
-            name: e.exerciseName,
-            description: e.exerciseDescription
+            exerciseName: e.exerciseName,
+            exerciseCategory: e.exerciseCategory,
+            exerciseDescription: e.exerciseDescription
           };
         });
     console.log({exercises});
@@ -41,6 +43,7 @@ class Exercises extends Component {
       <div className="App">
         <PageHeader />
         <Navigation />
+        <Link to="/exercises/add">Add Exercise</Link>
         <ExerciseList exercises={this.state.exercises} />
       </div>
     );

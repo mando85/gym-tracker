@@ -9,19 +9,21 @@ let router = express.Router();
 let controller = new usersController();
 // declaring a variable and requiring the controller.js file so that when we .....
 
-// 
-router = function(app){
-    // to the exerciseId column in the exercises collection in MongoDB
-    app.route('/api/users/:userId')
+
+router = function(app) {
+    // to the userId column in the  users collection in MongoDB
+    app.route('/api/users/:userId/')
     .get(function(req, res){
         controller.viewSingle(app, req, res);
     });
 
     app.route('/api/users') // <<<--- don't understand this - where is that routing to?!
-    .get((req,res)=> controller.viewAll(app, req, res))
-    .post((req,res)=> controller.addUser(app, req))
-    .put((req,res)=> controller.editUser(app, req, res))
-    .delete((req,res)=> controller.deleteUser(app, req, res))
+    .get((req, res)=> controller.viewAll(app, req, res))
+    .post((req, res)=> controller.addUser(app, req, res));
+
+    app.route('/api/users/:userId')
+    .put((req, res)=> controller.editUser(app, req, res))
+    .delete((req, res)=> controller.deleteUser(app, req, res))
 }
 
 // exports the router function declared above??

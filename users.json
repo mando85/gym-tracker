@@ -1,0 +1,20 @@
+[
+    {
+        "firstName": "Mandy",
+        "lastName": "Thornton",
+        "dateOfBirth": "1985-09-29",
+        "username": "mandy99"
+    },
+    {
+        "firstName": "Jessica",
+        "lastName": "Lettall",
+        "dateOfBirth": "17-05-1988",
+        "username": "jess99"
+    },
+    {
+        "firstName": "Jack",
+        "lastName": "Kenna",
+        "dateOfBirth": "11-12-1995",
+        "username": "jack99"
+    }
+]

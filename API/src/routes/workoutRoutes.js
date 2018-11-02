@@ -9,18 +9,22 @@ let router = express.Router();
 let controller = new WorkoutsController();
 // declaring a variable and requiring the controller.js file so that when we .....
 
-// 
-router = function(app){
-    // to the exerciseId column in the exercises collection in MongoDB
-    app.route('/api/workouts/:workoutId')
-    .get((req, res) => controller.viewSingle(app, req, res));
 
-    app.route('/api/workouts') // <<<--- don't understand this - where is that routing to?!
-    .get((req,res) => controller.viewAll(app, req, res))
-    .post((req,res) => controller.addWorkouts(app, req))
-    .put((req,res) => controller.editWorkout(app, req, res))
-    .delete((req,res) => controller.deleteWorkout(app, req, res))
-}
+    router = function(app) {
+        // to the workoutId column in the workouts collection in MongoDB
+        app.route('/api/workouts/:workoutId/')
+        .get(function(req, res){
+            controller.viewSingle(app, req, res);
+        });
+    
+        app.route('/api/workouts') // <<<--- don't understand this - where is that routing to?!
+        .get((req, res)=> controller.viewAll(app, req, res))
+        .post((req, res)=> controller.addWorkout(app, req, res));
+    
+        app.route('/api/workouts/:workoutId')
+        .put((req, res)=> controller.editWorkout(app, req, res))
+        .delete((req, res)=> controller.deleteWorkout(app, req, res))
+    }
 
 // exports the router function declared above??
 export default router;

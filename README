@@ -1,0 +1,14 @@
+start Mongodb
+in one terminal tab
+mongod
+open a new terminal tab
+mongo
+
+
+
+cd in to api/src
+in command line run 'npm run dev'
+
+
+cd into gui/src
+in command line run 'npm start'

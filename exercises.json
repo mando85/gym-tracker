@@ -1,0 +1,33 @@
+[
+    {
+        "exerciseName": "Bicep Curl",
+        "exerciseCategory": "Arms",
+        "exerciseDescription": "Some biceppy text"
+
+    },
+    {
+        "exerciseName": "Calf Raise",
+        "exerciseCategory": "Legs",
+        "exerciseDescription": "Some calfy text"
+    },
+    {
+        "exerciseName": "Shoulder Press",
+        "exerciseCategory": "Shoulders",
+        "exerciseDescription": "Some shouldery text"
+    },
+    {
+        "exerciseName": "Chest Press",
+        "exerciseCategory": "Chest",
+        "exerciseDescription": "Some chesty text"
+    },
+    {
+        "exerciseName": "Back Extension",
+        "exerciseCategory": "Back",
+        "exerciseDescription": "Some backy text"
+    },
+    {
+        "exerciseName": "Stepper",
+        "exerciseCategory": "Cardiovascular",
+        "exerciseDescription": "Some cardio-y text"
+    }
+]

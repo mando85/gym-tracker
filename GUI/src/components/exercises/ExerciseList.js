@@ -6,7 +6,7 @@ import Exercise from "./Exercise.js"
 function ExerciseList(props) {
   return (
     <div>
-        {props.exercises.map(e => <Exercise key={e.id} name={e.name} description={e.description} />)}
+        {props.exercises.map(e => <Exercise key={e.id} id={e.id} exerciseName={e.exerciseName} exerciseCategory={e.exerciseCategory} />)}
     </div>
   );
 }

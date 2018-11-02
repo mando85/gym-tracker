@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import Navigation from '../components/Navigation';
-import WorkoutList from '../components/WorkoutList';
+import WorkoutList from '../components/workouts/WorkoutList';
 import axios from "axios";
 
 class Exercises extends Component {
@@ -40,6 +41,7 @@ class Exercises extends Component {
       <div className="App">
         <PageHeader />
         <Navigation />
+        <Link to="/workouts/add">Add Workout</Link>
         <h1>Workouts</h1>
         <WorkoutList workouts={this.state.workouts} />
       </div>

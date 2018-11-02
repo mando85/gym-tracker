@@ -1,4 +1,5 @@
 class usersController {
+
     viewAll(app, req, res) {
         app.get('myDb').collection('users').find({}).toArray(function (err, docs) {
             if (err) {
@@ -7,7 +8,8 @@ class usersController {
             res.json(docs)
         })
     }
-// view a user from the user collection in the database
+
+    // view a user from the user collection in the database
     viewSingle(app, req, res) {
         let userId = req.params.userId;
 
@@ -18,24 +20,25 @@ class usersController {
             if (err) {
                 console.error(err)
             }
-            res.json(docs)
-        })
+            res.json(docs[0]);
+        });
     }
-// adding a user to the database
 
+    // adding a user to the database
     addUser(app, req, res) {
         let newUser = req.body;
-        let userId = parseInt(newUser.userId);
-        newUser.userId = userId;
         console.info(newUser);
 
-        app.get('myDb').collection('users').insertOne(newUser, function (err, docs) {
+        app.get('myDb').collection('users').insertOne(newUser, function (err, doc) {
             if (err) {
-                console.error(err)
+                console.error(err);
+                return res.json({ "error": "Oh no :-("});
             }
-            res.json({ "msg": "Successfully added User!"})
-        })
+            console.log(doc);
+            res.json({ "msg": "Successfully added user!", "id": doc.insertedId})
+        });
     }
+
 
 // editing an existing row in the users collection in the database
     editUser(app, req, res) {

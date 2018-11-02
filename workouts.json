@@ -1,0 +1,40 @@
+[
+    {
+        "workoutDate":{"$date":"2018-10-16T23:32:18Z"},
+        "workoutExercises": [{
+            "Arms": "Bicep Curl",
+            "Legs": "Calf Raise",
+            "Shoulders": "Shoulder Press"
+        }],
+        "noOfReps": 12,
+        "noOfSets": 3,
+        "noOfMinutes": 0,
+        "status": "Complete"
+    },
+
+    {
+        "workoutDate":{"$date":"2018-11-17T23:32:18Z"},
+        "workoutExercises": [{
+            "Legs": "Bicep Curl",
+            "Chest": "Calf Raise",
+            "Back": "Shoulder Press"
+        }],
+        "noOfReps": 12,
+        "noOfSets": 3,
+        "noOfMinutes": 0,
+        "status": "In Progress"
+    },
+
+    {
+        "workoutDate":{"$date":"2018-10-30T23:32:18Z"},
+        "workoutExercises": [{
+            "Cardiovascular": "Bicep Curl",
+            "Arms": "Calf Raise",
+            "Back": "Shoulder Press"
+        }],
+        "noOfReps": 12,
+        "noOfSets": 3,
+        "noOfMinutes": 0,
+        "status": "Upcoming"
+    }
+]

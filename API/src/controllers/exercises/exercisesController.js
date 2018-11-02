@@ -9,6 +9,7 @@ class exercisesController {
         })
     }
 
+    // view an exercise from the exercise collection in the database
     viewSingle(app, req, res) {
         let exerciseId = req.params.exerciseId;
 
@@ -19,39 +20,37 @@ class exercisesController {
             if (err) {
                 console.error(err)
             }
-            res.json(docs)
+            res.json(docs[0]);
         });
     }
 
+    // adding an exercise to the database
     addExercise(app, req, res) {
         let newExercise = req.body;
-        let exerciseId = parseInt(newExercise.exerciseId);
-        newExercise.exerciseId = exerciseId;
         console.info(newExercise);
 
-        app.get('myDb').collection('exercises').insertOne(newExercise, function (err, docs) {
+        app.get('myDb').collection('exercises').insertOne(newExercise, function (err, doc) {
             if (err) {
-                console.error(err)
+                console.error(err);
+                return res.json({ "error": "Oh no :-("});
             }
-            res.json({ "msg": "Successfully added exercise!"})
+            console.log(doc);
+            res.json({ "msg": "Successfully added exercise!", "id": doc.insertedId})
         });
     }
 
     editExercise(app, req, res) {
-        console.info("PUT controller")
-        let editExercise = req.body;
-        console.dir(editExercise);
-        let exerciseId = parseInt(editExercise.exerciseId);
+
+        let exerciseId = req.params.exerciseId;
+        let exercise = req.body;
+
         app.get('myDb').collection("exercises").updateOne(
             { "_id": exerciseId },
             {
                 $set: {
-                    "exerciseName": editExercise.exerciseName,
-                    "exerciseCategory": editExerciseCategory.exerciseCategory,
-                    "exerciseDescription": editExerciseDescription.exerciseDescription,
-                    "noOfReps": editNoOfReps.noOfReps,
-                    "noOfSets": editNoOfSets.noOfSets,
-                    "noOfMinutes": editNoOfMinutes.noOfMinutes
+                    "exerciseName": exercise.exerciseName,
+                    "exerciseCategory": exercise.exerciseCategory,
+                    "exerciseDescription": exercise.exerciseDescription
                 }
             },
             function (err, dbResp) {
@@ -67,10 +66,10 @@ class exercisesController {
     }
 
     deleteExercise(app, req, res) {
-        let removeExercise = req.body;
-        let exerciseId = removeExercise.exerciseId;
-        console.dir(removeExercise);
-
+        console.log('DELETE EXERCISE');
+        let exerciseId = req.params.exerciseId;
+        
+console.log('exerciseid', exerciseId);
         let ObjectId = require('mongodb').ObjectId;
         const exerciseIdObject = new ObjectId(exerciseId);
 
@@ -80,6 +79,8 @@ class exercisesController {
                 if (err) {
                     console.error(err)
                 }
+
+                console.log('deletedCount: ', dbResp.deletedCount);
                 if (dbResp.deletedCount === 1) {
                     res.json({ msg: "Exercise successfully deleted" })
                 } else {

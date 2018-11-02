@@ -20,23 +20,23 @@ class WorkoutsController {
             if (err) {
                 console.error(err)
             }
-            res.json(docs)
+            res.json(docs[0]);
         });
     }
 
     // adding a workout to the database
     addWorkout(app, req, res) {
         let newWorkout = req.body;
-        let workoutId = parseInt(newWorkout.workoutId);
-        newWorkout.workoutId = workoutId;
         console.info(newWorkout);
 
-        app.get('myDb').collection('workouts').insertOne(newWorkout, function (err, docs) {
+        app.get('myDb').collection('workouts').insertOne(newWorkout, function (err, doc) {
             if (err) {
-                console.error(err)
+                console.error(err);
+                return res.json({ "error": "Oh no :-("});
             }
-            res.json({ "msg": "Successfully added Workout!"})
-        })
+            console.log(doc);
+            res.json({ "msg": "Successfully added workout!", "id": doc.insertedId})
+        });
     }
 
 // editing an existing row in the workouts collection in the database
@@ -50,10 +50,11 @@ class WorkoutsController {
             {
                 $set: {
                     "workoutDate": editWorkoutDate.workoutDate,
-                    "exerciseId": editExerciseId.exerciseId
-                    // "exerciseId": editExerciseId.exerciseId
-                    // "exerciseId": editExerciseId.exerciseId
-                    // "exerciseId": editExerciseId.exerciseId
+                    "exerciseCategory": editExerciseCategory.exerciseCategory,
+                    "workoutExerciseName": editExerciseName.workoutExerciseName,
+                    "noOfReps": editNoOfReps.noOfReps,
+                    "noOfSets": editNoOfSets.noOfSets,
+                    "noOfMinutes": editNoOfMinutes.noOfMinutes
                 }
             },
             function (err, dbResp) {
