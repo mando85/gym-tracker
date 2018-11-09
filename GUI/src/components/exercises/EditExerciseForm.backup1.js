@@ -1,6 +1,3 @@
-// THIS IS NOT CORRECT!
-
-
 import React from 'react';
 class EditExercise extends React.Component {
     constructor(props) {

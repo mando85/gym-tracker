@@ -5,6 +5,7 @@ import Navigation from '../Navigation';
 
 export default class WorkoutForm extends React.Component {
     state = {
+        workoutName: '',
         workoutDate: '',
         exerciseCategory: '',
         workoutExerciseName: '',
@@ -27,24 +28,6 @@ export default class WorkoutForm extends React.Component {
 
         this.saveWorkout();
 
-        // this.setState({
-        //     workoutDate: '',
-        //     exerciseCategory: '',
-        //     workoutExerciseName: '',
-        //     noOfReps: '',
-        //     noOfSets: '',
-        //     noOfMinutes: ''
-        // });
-
-        // this.props.onChange({
-        //     workoutDate: '',
-        //     exerciseCategory: '',
-        //     workoutExerciseName: '',
-        //     noOfReps: '',
-        //     noOfSets: '',
-        //     noOfMinutes: ''
-        // });
-
         console.log(this.state);
     }
 
@@ -55,6 +38,7 @@ export default class WorkoutForm extends React.Component {
                 console.log(response);
 
                 this.setState({
+                    workoutName: '',
                     workoutDate: '',
                     exerciseCategory: '',
                     workoutExerciseName: '',
@@ -78,6 +62,13 @@ export default class WorkoutForm extends React.Component {
                 <Navigation />
                 <form>
                     <p>Add a Workout</p>
+                    <input
+                    name="workoutName"
+                    placeholder="Workout Name"
+                    value={this.state.workoutName}
+                    onChange={element => this.change(element)}
+                />
+                <br />
                     <input
                     name="workoutDate"
                     placeholder="Workout Date"

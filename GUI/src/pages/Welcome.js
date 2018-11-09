@@ -9,7 +9,8 @@ class Welcome extends Component {
         <PageHeader />
         <Navigation />
         <h1>Welcome</h1>
-        Texty stuff goes here. Login and Register?
+        This is Gym Tracker<br /><br />
+        Add your own exercises, construct your own gym sessions and keep track of you workouts.<br />
       </div>
     );
   }

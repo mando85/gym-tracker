@@ -8,7 +8,7 @@ function User(props) {
   console.log({props});
   return (
     <div className="user">
-      <Link to={`/users/${props.id}`}><span><b>{props.firstName}</b> <br /> {props.lastName}</span></Link>
+      <Link to={`/users/${props.id}`}><span>{props.firstName}<br />{props.lastName}</span></Link>
     </div>
   );
 }

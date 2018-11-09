@@ -4,12 +4,37 @@ import PageHeader from '../PageHeader';
 import Navigation from '../Navigation';
 
 export default class UserForm extends React.Component {
+
     state = {
+        id: null,
         firstName: '',
         lastName: '',
         username: '',
         email: ''
+    };
+
+    componentDidMount(){
+        this.getUser(this.props.match.params.id);
     }
+    
+    getUser(id) {
+        axios
+        .get(`http://localhost:3002/api/users/${id}`)
+        .then(response => {
+            console.log('API RESPONSE', response);
+    
+            this.setState({
+                id: response.data._id,
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                username: response.data.username,
+                email: response.data.email,
+            });
+
+        })
+        .catch(error => console.log(error));
+    }
+
 
     change = (element) => {
         this.setState({
@@ -20,18 +45,18 @@ export default class UserForm extends React.Component {
 
     onSubmit = (element) => {
         element.preventDefault();
-        // this.props.onSubmit(this.state);
 
-        this.saveUser();
+        this.updateUser();
 
-        console.log(this.state);
+
+        console.log('on submit', this.state);
     }
 
     // adds data to the database
-    saveUser() {
-        axios.post('http://localhost:3002/api/users', this.state)
+    updateUser() {
+        axios.put(`http://localhost:3002/api/users/${this.state.id}`, this.state)
             .then((response) => {
-                console.log(response);
+                console.log('updated', response);
 
                 this.setState({
                     firstName: '',
@@ -40,13 +65,14 @@ export default class UserForm extends React.Component {
                     email: ''
                 });
 
-                this.props.history.push('/users/' + response.data.id);
+                this.props.history.push('/users/' + this.state.id);
 
             })
             .catch((error) => {
                 console.error(error);
             });
-      }
+    }
+
 
     render() {
         return (
@@ -54,7 +80,7 @@ export default class UserForm extends React.Component {
                 <PageHeader />
                 <Navigation />
                 <form>
-                    <p>Add a User</p>
+                    <p>Edit this User</p>
                     <input
                         name="firstName"
                         placeholder="First Name"
@@ -82,8 +108,8 @@ export default class UserForm extends React.Component {
                         value={this.state.email}
                         onChange={element => this.change(element)}
                     />
-                    <br />
-                    <button onClick={element => this.onSubmit(element)}>Add User</button>
+                    <br /><br />
+                    <button onClick={element => this.onSubmit(element)}>Update User</button>
 
                 </form>
             </div>

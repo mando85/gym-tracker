@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import PageHeader from '../PageHeader';
+import Navigation from '../Navigation';
 
 class ViewUser extends React.Component {
     state = {
@@ -54,13 +56,16 @@ class ViewUser extends React.Component {
         console.log(this.props);
       return (
         <div className="viewUser">
-            <h2>View User</h2>
-            <h2>{this.state.firstName}</h2>
-            <h3>{this.state.lastName}</h3>
-            <h3>{this.state.username}</h3>
-            <h3>{this.state.email}</h3>
+                <PageHeader />
+                <Navigation />
+          <div id="userInformation">
+            <br />
+            <h2 id="fullName">{this.state.firstName} {this.state.lastName}</h2>
+            <h3 id="username">{this.state.username}</h3>
+            <h3 id="email">{this.state.email}</h3>
+          </div>
 
-            <button onClick={element => this.editClicked(element)}>Edit User</button>
+            <button onClick={() => { this.props.history.push(`/users/${this.state.id}/edit`) }}>Edit User</button>&nbsp;
             <button onClick={element => this.deleteClicked(element)}>Delete User</button>
             
 

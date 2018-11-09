@@ -3,18 +3,21 @@
         "firstName": "Mandy",
         "lastName": "Thornton",
         "dateOfBirth": "1985-09-29",
-        "username": "mandy99"
+        "username": "mandy99",
+        "email": "mandy@email.com"
     },
     {
         "firstName": "Jessica",
         "lastName": "Lettall",
         "dateOfBirth": "17-05-1988",
-        "username": "jess99"
+        "username": "jess99",
+        "email": "jess@email.com"
     },
     {
         "firstName": "Jack",
         "lastName": "Kenna",
         "dateOfBirth": "11-12-1995",
-        "username": "jack99"
+        "username": "jack99",
+        "email": "jack@email.com"
     }
 ]

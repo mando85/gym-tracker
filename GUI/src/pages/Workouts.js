@@ -22,7 +22,7 @@ class Exercises extends Component {
         const workouts = response.data.map(w => {
           return {
             id: w._id,
-            workoutDate: w.workoutDate
+            workoutName: w.workoutName
             // workoutExercises: w.workoutExercises
           };
         });
@@ -41,9 +41,13 @@ class Exercises extends Component {
       <div className="App">
         <PageHeader />
         <Navigation />
-        <Link to="/workouts/add">Add Workout</Link>
-        <h1>Workouts</h1>
-        <WorkoutList workouts={this.state.workouts} />
+        <h1>WORKOUTS</h1>
+        <div id="addWorkout">
+          <Link to="/workouts/add">Add Workout</Link>
+        </div>
+        <br />
+        Filter workouts by name:
+        <br /><WorkoutList workouts={this.state.workouts} />
       </div>
     );
   }

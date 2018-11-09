@@ -8,7 +8,7 @@ function Workout(props) {
   console.log({props});
   return (
     <div className="workout">
-      <Link to={`/workouts/${props.id}`}><span><b>{props.workoutDate}</b> <br /> {props.workoutExerciseName}</span></Link>
+      <Link to={`/workouts/${props.id}`}><span><b>{props.workoutName}</b></span></Link>
     </div>
   );
 }

@@ -1,15 +1,33 @@
 import React from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 import PageHeader from '../PageHeader';
 import Navigation from '../Navigation';
+import "./Exercise.css";
+
+const options = [
+    { value: 'Arms', label: 'Arms' },
+    { value: 'Chest', label: 'Chest' },
+    { value: 'Shoulders', label: 'Shoulders' },
+    { value: 'Legs', label: 'Legs' },
+    { value: 'Back', label: 'Back' },
+    { value: 'Cardio', label: 'Cardio' }
+  ];
 
 export default class ExerciseForm extends React.Component {
 
     state = {
         id: null,
         exerciseName: '',
-        exerciseCategory: '',
-        exerciseDescription: ''
+        exerciseCategory: null,
+        exerciseDescription: '',
+
+        selectedExerciseCategory: null  // Used for storing the Select Component
+    };
+    handleSelectChange = (selectedExerciseCategory) => {
+        this.setState({ selectedExerciseCategory });
+        this.setState({'exerciseCategory' : selectedExerciseCategory.value})
+        console.log('Option selected:', selectedExerciseCategory);
     };
 
     componentDidMount(){
@@ -26,7 +44,9 @@ export default class ExerciseForm extends React.Component {
                 id: response.data._id,
                 exerciseName: response.data.exerciseName,
                 exerciseCategory: response.data.exerciseCategory,
-                exerciseDescription: response.data.exerciseDescription
+                exerciseDescription: response.data.exerciseDescription,
+
+                selectedExerciseCategory: { value: response.data.exerciseCategory, label: response.data.exerciseCategory }
             });
 
         })
@@ -43,10 +63,7 @@ export default class ExerciseForm extends React.Component {
 
     onSubmit = (element) => {
         element.preventDefault();
-
         this.updateExercise();
-
-
         console.log(this.state);
     }
 
@@ -78,7 +95,7 @@ export default class ExerciseForm extends React.Component {
                 <PageHeader />
                 <Navigation />
                 <form>
-                    <p>Edit an Exercise</p>
+                    <p>Edit this Exercise</p>
                     <input
                         name="exerciseName"
                         placeholder="Exercise Name"
@@ -86,13 +103,12 @@ export default class ExerciseForm extends React.Component {
                         onChange={element => this.change(element)}
                     />
                     <br />
-                    <select
-                        name="exerciseCategory"
-                        placeholder="Exercise Category"
-                        value={this.state.exerciseCategory}
-                        onChange={element => this.change(element)}
+                    <Select
+                        className="exerciseCategory"
+                        value={this.state.selectedExerciseCategory}
+                        onChange={element => this.handleSelectChange(element)}
+                        options={options}
                     />
-                    <br />
                     <textarea
                         name="exerciseDescription"
                         placeholder="Exercise Description"

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import PageHeader from '../PageHeader';
+import Navigation from '../Navigation';
 
 class ViewExercise extends React.Component {
     state = {
@@ -53,12 +55,17 @@ class ViewExercise extends React.Component {
         console.log(this.props);
       return (
         <div className="viewExercise">
-            <h2>View Exercise</h2>
-            <h2>{this.state.exerciseName}</h2>
-            <h3>{this.state.exerciseCategory}</h3>
-            <h3>{this.state.exerciseDescription}</h3>
+                <PageHeader />
+                <Navigation />
             
-            <button onClick={() => { this.props.history.push(`/exercises/${this.state.id}/edit`) }}>Edit Exercise</button>
+            <div id="exerciseInformation">
+            <br />
+            <h2 id="exerciseName">{this.state.exerciseName}</h2>
+            <h3 id="exerciseCategory">{this.state.exerciseCategory}</h3>
+            <h4 id="exerciseDescription">{this.state.exerciseDescription}</h4>
+            </div>
+            
+            <button onClick={() => { this.props.history.push(`/exercises/${this.state.id}/edit`) }}>Edit Exercise</button>&nbsp;
             <button onClick={element => this.deleteClicked(element)}>Delete Exercise</button>
 
         </div>

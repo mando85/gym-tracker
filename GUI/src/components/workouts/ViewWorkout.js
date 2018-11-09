@@ -1,15 +1,19 @@
 import React from 'react';
 import axios from 'axios';
+import PageHeader from '../PageHeader';
+import Navigation from '../Navigation';
 
 class ViewWorkout extends React.Component {
     state = {
         id: null,
+        workoutName: '',
         workoutDate: '',
         exerciseCategory: '',
         workoutExerciseName: '',
         noOfReps: '',
         noOfSets: '',
-        noOfMinutes: ''
+        noOfMinutes: '',
+        status: ''
     };
 
 
@@ -25,12 +29,14 @@ class ViewWorkout extends React.Component {
     
             this.setState({
                 id: response.data._id,
+                workoutName: response.data.workoutName,
                 workoutDate: response.data.workoutDate,
                 exerciseCategory: response.data.exerciseCategory,
                 workoutExerciseName: response.data.workoutExerciseName,
                 noOfReps: response.data.noOfReps,
                 noOfSets: response.data.noOfSets,
-                noOfMinutes: response.data.noOfMinutes
+                noOfMinutes: response.data.noOfMinutes,
+                status: response.data.status
             });
 
           })
@@ -59,15 +65,20 @@ class ViewWorkout extends React.Component {
         console.log(this.props);
       return (
         <div className="viewWorkout">
-            <h2>View Workout</h2>
-            <h2>{this.state.workoutDate}</h2>
+            <PageHeader />
+            <Navigation />
+            <div id="workoutInformation">
+            <h2>Workout: {this.state.workoutName}</h2>
+            <h2>Date: {this.state.workoutDate}</h2>
             <h3>{this.state.exerciseCategory}</h3>
             <h3>{this.state.workoutExerciseName}</h3>
-            <h3>{this.state.noOfReps}</h3>
-            <h3>{this.state.noOfSets}</h3>
-            <h3>{this.state.noOfMinutes}</h3>
+            <h3>Reps: {this.state.noOfReps}</h3>
+            <h3>Sets: {this.state.noOfSets}</h3>
+            <h3>Duration (mins): {this.state.noOfMinutes}</h3>
+            <h3>Workout status: {this.state.status}</h3>
+            </div>
             
-            <button onClick={element => this.editClicked(element)}>Edit Workout</button>
+            <button onClick={() => { this.props.history.push(`/workouts/${this.state.id}/edit`) }}>Edit Workout</button>&nbsp;
             <button onClick={element => this.deleteClicked(element)}>Delete Workout</button>
 
         </div>

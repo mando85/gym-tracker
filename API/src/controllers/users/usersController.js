@@ -12,7 +12,6 @@ class usersController {
     // view a user from the user collection in the database
     viewSingle(app, req, res) {
         let userId = req.params.userId;
-
         let ObjectId = require('mongodb').ObjectId;
         const userIdObject = new ObjectId(userId);
 
@@ -40,20 +39,23 @@ class usersController {
     }
 
 
-// editing an existing row in the users collection in the database
+    // editing an existing row in the users collection in the database
     editUser(app, req, res) {
-        console.info("PUT controller")
-        let editUser = req.body;
-        console.dir(editUser);
-        let userId = parseInt(editUser.userId);
+
+        let userId = req.params.userId;
+        let ObjectId = require('mongodb').ObjectId;
+        const userIdObject = new ObjectId(userId);
+
+        let user = req.body;
+
         app.get('myDb').collection("users").updateOne(
-            { "_id": userId },
+            { "_id": userIdObject },
             {
                 $set: {
-                    "firstName": editFirstName.firstName,
-                    "surname": editSurname.surname,
-                    "dateOfBirth": editDateOfBirth.dateOfBirth,
-                    "username": editUsername.username
+                    "firstName": user.firstName,
+                    "lastName": user.lastName,
+                    "username": user.username,
+                    "email" : user.email
                 }
             },
             function (err, dbResp) {
@@ -63,29 +65,35 @@ class usersController {
                 if (dbResp.modifiedCount === 1) {
                     res.json({ msg: "User successfully edited" })
                 } else {
-                    res.json({ msg: "Not Found" })
+                    res.json({ msg: "User not edited" })
                 }
             })
-    }
-    
+    } 
+
     // deleting a row from the users collection in the database
     deleteUser(app, req, res) {
-        let removeUser = req.body;
-        let userId = parseInt(removeUser.userId);
-        console.dir(removeUser);
+        console.log('DELETE USER');
+        let userId = req.params.userId;
+        
+        console.log('userid', userId);
+        let ObjectId = require('mongodb').ObjectId;
+        const userIdObject = new ObjectId(userId);
+
         app.get('myDb').collection("users").deleteOne(
-            { "_id": userId },
+            { "_id": userIdObject },
             function (err, dbResp) {
                 if (err) {
                     console.error(err)
                 }
+
+                console.log('deletedCount: ', dbResp.deletedCount);
                 if (dbResp.deletedCount === 1) {
                     res.json({ msg: "User successfully deleted" })
                 } else {
                     res.json({ msg: "Not Found" })
                 }
             })
+    }    
     }
-}
 
 export default usersController;

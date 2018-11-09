@@ -1,10 +1,10 @@
 [
     {
+        "workoutName": "Arms & Back",
         "workoutDate":{"$date":"2018-10-16T23:32:18Z"},
         "workoutExercises": [{
             "Arms": "Bicep Curl",
-            "Legs": "Calf Raise",
-            "Shoulders": "Shoulder Press"
+            "Back": "Back Extension"
         }],
         "noOfReps": 12,
         "noOfSets": 3,
@@ -13,11 +13,11 @@
     },
 
     {
+        "workoutName": "Shoulders & Chest",
         "workoutDate":{"$date":"2018-11-17T23:32:18Z"},
         "workoutExercises": [{
-            "Legs": "Bicep Curl",
-            "Chest": "Calf Raise",
-            "Back": "Shoulder Press"
+            "Shoulders": "Shoulder Press",
+            "Chest": "Chest Press"
         }],
         "noOfReps": 12,
         "noOfSets": 3,
@@ -26,11 +26,10 @@
     },
 
     {
+        "workoutName": "Leg Day",
         "workoutDate":{"$date":"2018-10-30T23:32:18Z"},
         "workoutExercises": [{
-            "Cardiovascular": "Bicep Curl",
-            "Arms": "Calf Raise",
-            "Back": "Shoulder Press"
+           "Legs": "Calf Raise"
         }],
         "noOfReps": 12,
         "noOfSets": 3,

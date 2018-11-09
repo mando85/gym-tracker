@@ -11,3 +11,48 @@
     text-decoration: none;
     color: #333;
   }
+
+  .exerciseCategory {
+    width: 140px;
+    height: 50px;
+    margin: auto;
+    font-size: 0.7em;
+  }
+
+  .viewExercise {
+    text-align: center;
+  }
+
+  #exerciseInformation{
+    text-align: center;
+  }
+
+  #exerciseName{
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #282c34;
+  }
+
+  #exerciseCategory{
+    text-transform: uppercase;
+    font-size: 1.5em;
+    color: #61DAFB;
+  }
+
+  #exerciseDescription{
+    color: #282c34;
+  }
+
+  #addExercise{
+    color: #282c34;
+  }
+
+  #addExercise a {
+    color: #282c34;
+  }
+
+  #addExercise a:hover {
+    color: #282c34;
+    transition: 0.1s;
+    font-size: 1.3em;
+  }

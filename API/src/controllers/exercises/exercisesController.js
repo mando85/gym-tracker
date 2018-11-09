@@ -32,20 +32,23 @@ class exercisesController {
         app.get('myDb').collection('exercises').insertOne(newExercise, function (err, doc) {
             if (err) {
                 console.error(err);
-                return res.json({ "error": "Oh no :-("});
+                return res.json({ "Error": "Oh no :-("});
             }
             console.log(doc);
-            res.json({ "msg": "Successfully added exercise!", "id": doc.insertedId})
+            res.json({ "Message": "Successfully added exercise!", "id": doc.insertedId})
         });
     }
 
     editExercise(app, req, res) {
 
         let exerciseId = req.params.exerciseId;
+        let ObjectId = require('mongodb').ObjectId;
+        const exerciseIdObject = new ObjectId(exerciseId);
+
         let exercise = req.body;
 
         app.get('myDb').collection("exercises").updateOne(
-            { "_id": exerciseId },
+            { "_id": exerciseIdObject },
             {
                 $set: {
                     "exerciseName": exercise.exerciseName,
@@ -57,6 +60,7 @@ class exercisesController {
                 if (err) {
                     console.error(err)
                 }
+
                 if (dbResp.modifiedCount === 1) {
                     res.json({ msg: "Exercise successfully edited" })
                 } else {
@@ -69,7 +73,7 @@ class exercisesController {
         console.log('DELETE EXERCISE');
         let exerciseId = req.params.exerciseId;
         
-console.log('exerciseid', exerciseId);
+        console.log('exerciseid', exerciseId);
         let ObjectId = require('mongodb').ObjectId;
         const exerciseIdObject = new ObjectId(exerciseId);
 

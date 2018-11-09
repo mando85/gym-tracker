@@ -11,3 +11,47 @@
     text-decoration: none;
     color: #333;
   }
+
+  .dropdown {
+    width: 140px;
+    height: 50px;
+    margin: auto;
+    font-size: 0.7em;
+  }
+
+  .viewUser {
+    text-align: center;
+  }
+
+  #userInformation{
+    text-align: center;
+  }
+
+  #fullName{
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #282c34;
+  }
+
+  #username{
+    font-size: 1.5em;
+    color: #282c34;
+  }
+
+  #email{
+    color: #282c34;
+  }
+
+  #addUser{
+    color: #282c34;
+  }
+
+  #addUser a {
+    color: #282c34;
+  }
+
+  #addUser a:hover {
+    color: #282c34;
+    transition: 0.1s;
+    font-size: 1.3em;
+  }

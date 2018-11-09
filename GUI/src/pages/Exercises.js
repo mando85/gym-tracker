@@ -43,7 +43,13 @@ class Exercises extends Component {
       <div className="App">
         <PageHeader />
         <Navigation />
-        <Link to="/exercises/add">Add Exercise</Link>
+        <h1>EXERCISES</h1>
+        <div id="addExercise">
+          <Link to="/exercises/add">Add Exercise</Link>
+        </div>
+        <br />
+        Filter exercises by name:
+        <br /><br />
         <ExerciseList exercises={this.state.exercises} />
       </div>
     );

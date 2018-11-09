@@ -11,3 +11,32 @@
     text-decoration: none;
     color: #333;
   }
+
+  .dropdown {
+    width: 140px;
+    height: 50px;
+    margin: auto;
+    font-size: 0.7em;
+  }
+
+  .viewWorkout {
+    text-align: center;
+  }
+
+  #workoutInformation{
+    text-align: center;
+  }
+
+  #addWorkout{
+    color: #282c34;
+  }
+
+  #addWorkout a {
+    color: #282c34;
+  }
+
+  #addWorkout a:hover {
+    color: #282c34;
+    transition: 0.1s;
+    font-size: 1.3em;
+  }

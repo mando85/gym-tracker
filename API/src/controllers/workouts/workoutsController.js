@@ -41,20 +41,24 @@ class WorkoutsController {
 
 // editing an existing row in the workouts collection in the database
     editWorkout(app, req, res) {
-        console.info("PUT controller")
-        let editWorkout = req.body;
-        console.dir(editWorkout);
-        let workoutId = parseInt(editWorkout.workoutId);
+
+        let workoutId = req.params.workoutId;
+        let ObjectId = require('mongodb').ObjectId;
+        const workoutIdObject = new ObjectId(workoutId);
+
+        let workout = req.body;
+
         app.get('myDb').collection("workouts").updateOne(
-            { "_id": workoutId },
+            { "_id": workoutIdObject },
             {
                 $set: {
-                    "workoutDate": editWorkoutDate.workoutDate,
-                    "exerciseCategory": editExerciseCategory.exerciseCategory,
-                    "workoutExerciseName": editExerciseName.workoutExerciseName,
-                    "noOfReps": editNoOfReps.noOfReps,
-                    "noOfSets": editNoOfSets.noOfSets,
-                    "noOfMinutes": editNoOfMinutes.noOfMinutes
+                    "workoutName": workout.workoutName,
+                    "workoutDate": workout.workoutDate,
+                    "exerciseCategory": workout.exerciseCategory,
+                    "workoutExerciseName": workout.workoutExerciseName,
+                    "noOfReps": workout.noOfReps,
+                    "noOfSets": workout.noOfSets,
+                    "noOfMinutes": workout.noOfMinutes
                 }
             },
             function (err, dbResp) {
@@ -71,22 +75,28 @@ class WorkoutsController {
 
     // deleting a row from the workouts collection in the database
     deleteWorkout(app, req, res) {
-        let removeWorkout = req.body;
-        let workoutId = parseInt(removeWorkout.workoutId);
-        console.dir(removeWorkout);
+        console.log('DELETE WORKOUT');
+        let workoutId = req.params.workoutId;
+        
+        console.log('workoutid', workoutId);
+        let ObjectId = require('mongodb').ObjectId;
+        const workoutIdObject = new ObjectId(workoutId);
+
         app.get('myDb').collection("workouts").deleteOne(
-            { "_id": workoutId },
+            { "_id": workoutIdObject },
             function (err, dbResp) {
                 if (err) {
                     console.error(err)
                 }
+
+                console.log('deletedCount: ', dbResp.deletedCount);
                 if (dbResp.deletedCount === 1) {
                     res.json({ msg: "Workout successfully deleted" })
                 } else {
                     res.json({ msg: "Not Found" })
                 }
             })
+    }    
     }
-}
 
 export default WorkoutsController;

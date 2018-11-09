@@ -41,9 +41,14 @@ class Users extends Component {
       <div className="App">
         <PageHeader />
         <Navigation />
-        <Link to="/users/add">Add User</Link>
-        <h1>Users</h1>
-        <UserList users={this.state.users} />
+        <h1>USERS</h1>
+        <div id="addUser">
+            <Link to="/users/add">Add User</Link>
+        </div>
+        <br />
+        Filter users by first name or surname:
+        <br /><br /><UserList users={this.state.users} /><br />
+
       </div>
     );
   }

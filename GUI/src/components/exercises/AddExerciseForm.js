@@ -1,14 +1,32 @@
 import React from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 import PageHeader from '../PageHeader';
 import Navigation from '../Navigation';
+import "./Exercise.css";
+
+const options = [
+    { value: 'Arms', label: 'Arms' },
+    { value: 'Chest', label: 'Chest' },
+    { value: 'Shoulders', label: 'Shoulders' },
+    { value: 'Legs', label: 'Legs' },
+    { value: 'Back', label: 'Back' },
+    { value: 'Cardio', label: 'Cardio' }
+  ];
 
 export default class ExerciseForm extends React.Component {
     state = {
         exerciseName: '',
-        exerciseCategory: '',
-        exerciseDescription: ''
+        exerciseCategory: null,
+        exerciseDescription: '',
+
+        selectedExerciseCategory: null  // Used for storing the Select Component
     }
+    handleSelectChange = (selectedExerciseCategory) => {
+        this.setState({ selectedExerciseCategory });
+        this.setState({'exerciseCategory' : selectedExerciseCategory.value})
+        console.log('Option selected:', selectedExerciseCategory);
+    };
 
     change = (element) => {
         // this.props.onChange({ [element.target.name]: element.target.value });
@@ -29,14 +47,21 @@ export default class ExerciseForm extends React.Component {
 
     // adds data to the database
     saveExercise() {
-        axios.post('http://localhost:3002/api/exercises', this.state)
+        const exercise = {
+            exerciseName: this.state.exerciseName,
+            exerciseCategory: this.state.exerciseCategory,
+            exerciseDescription: this.state.exerciseDescription
+        }
+
+        axios.post('http://localhost:3002/api/exercises', exercise)
             .then((response) => {
                 console.log(response);
 
                 this.setState({
                     exerciseName: '',
                     exerciseCategory: '',
-                    exerciseDescription: ''
+                    exerciseDescription: '',
+                    selectedExerciseCategory: null
                 });
 
                 this.props.history.push('/exercises/' + response.data.id);
@@ -46,8 +71,6 @@ export default class ExerciseForm extends React.Component {
                 console.error(error);
             });
     }
-
-    // redirectToExercise(){ }
 
 
     render() {
@@ -64,13 +87,13 @@ export default class ExerciseForm extends React.Component {
                         onChange={element => this.change(element)}
                     />
                     <br />
-                    <select
-                        name="exerciseCategory"
-                        placeholder="Exercise Category"
-                        value={this.state.exerciseCategory}
-                        onChange={element => this.change(element)}
+
+                    <Select className="exerciseCategory"
+                        value={this.state.selectedExerciseCategory}
+                        onChange={this.handleSelectChange}
+                        options={options}
                     />
-                    <br />
+
                     <textarea
                         name="exerciseDescription"
                         placeholder="Exercise Description"
